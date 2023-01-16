@@ -5,15 +5,12 @@ import { nanoid } from 'nanoid';
 import { addContact } from 'redux/contactsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 export function Form() {
-
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
-
 
   let NameId = nanoid();
   let NumberId = nanoid();
@@ -32,7 +29,7 @@ export function Form() {
         break;
     }
   };
-  
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -40,24 +37,21 @@ export function Form() {
     if (contactIsNotInList(name)) {
       dispatch(action);
       reset();
-  };
-
-
+    }
   };
 
   const contactIsNotInList = name => {
     if (contacts.some(e => e.name === name)) {
-    alert(`${name} is already in contacts!`);
+      alert(`${name} is already in contacts!`);
       return false;
     }
-    return true;}
+    return true;
+  };
 
   const reset = () => {
     setName('');
     setNumber('');
   };
-
-
 
   return (
     <FormEl onSubmit={handleSubmit}>
